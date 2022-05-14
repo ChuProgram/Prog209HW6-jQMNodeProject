@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <name>jQuery Mobile: Course Project</name>
+    <!-- <documentation at http://demos.jquerymobile.com/1.4.1/ > -->
+
+    <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+</head>
+
+<body>
+
+    <!---------------------------------------------- Home Page ---------------------------------------------->
+    <div data-role="page" id="homePage">
+
+        <!-- page header -->
+        <div data-role="header" data-theme='a'>
+            <h1>Washington Foodie (WaFoo)</h1>
+            <!-- navbar -->
+            <div data-role="navbar" data-theme='b'>
+                <ul>
+                    <li><a href="#homePage">Home</a></li>
+                    <li><a href="#addPage">Add Restaurant</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>
+                    <li><a href="#detailPage">Restaurant Detail</a></li>
+                    <li><a href="#updatePage">Update Details</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- page content -->
+        <div data-role="content" data-theme='b'>
+            <div class="newFont">
+                <h2>Welcome to Washington Foodie</h2>
+                <h3>Tastiest places in The Evergreen State</h3>
+            </div>
+        </div>
+
+
+        <br />
+        <strong>****This Website will be used for those who want to save their favorite restaurant in WASHINGTON state and its details.
+        </strong>
+
+
+        <!-- page footer -->
+        <div data-role="footer" data-theme='b'>
+            <h1>&copy; Copyright 2022 by Jackson Chu</h1>
+        </div>
+    </div>
+    <!------------------------------------------ End of Home Page ------------------------------------------->
+
+
+
+
+
+    <!----------------------------------------------- Add Page ---------------------------------------------->
+    <div data-role="page" id="addPage">
+
+        <!-- page header -->
+        <div data-role="header" data-theme='a'>
+            <h1>Add a Restaurant</h1>
+            <!-- navbar -->
+            <div data-role="navbar" data-theme='b'>
+                <ul>
+                    <li><a href="#homePage">Home</a></li>
+                    <li><a href="#addPage">Add Restaurant</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>
+                    <li><a href="#detailPage">Restaurant Detail</a></li>
+                    <li><a href="#updatePage">Update Details</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- page content -->
+        <div data-role="content" data-theme='c'>
+            <h2>Enter a new Restaurant</h2>
+            <br />
+
+            <a href="#popupMenu" data-rel="popup" data-transition="slideup"
+                class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Name Already Exists?</a>
+            <div data-role="popup" id="popupMenu" data-theme="b">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                    <li data-role="list-divider">Choose an action</li>
+                    <li><a href="#listPage" data-transition="flow">Go to List</a></li>
+                </ul>
+            </div>
+            <br /><br /><br />
+
+            Enter Restaurant Name <br />
+            <input type="text" value="" id="name" placeholder="Restaurant Name" />
+            Enter Date Visited <br />
+            <input type="text" value="" id="date" placeholder="mm/dd/yyyy" />
+            Enter Location <br />
+            <input type="text" value="" id="city" placeholder="City" />
+            Enter Cuisine Style <br />
+            <input type="text" value="" id="cuisine" placeholder="e.g. Japanese, American, etc." />
+            Enter Menu(s) Tried <br />
+            <input type="text" value="" id="menuTried" placeholder="e.g. Beef Wellington, Caesar Salad" />
+
+
+            <label for="select-price">Select Price</label>
+            <select name="select-price" id="select-price">
+                <option value="invalid">Select Price Range...</option>
+                <option value="3">$$$ (Expensive)</option>
+                <option value="2">$$ (Average)</option>
+                <option value="1">$ (Cheap)</option>
+            </select>
+
+            Enter Restaurant Website (if available)<br />
+            <input type="text" value="" id="website" placeholder="URL" />
+
+            <input type="button" value="Click To Add Restaurant" id="addBtn" data-inline="true" />
+            <input type="button" value="Clear Data" id="clearBtn" data-inline="true" />
+        </div>
+
+        <!--   page footer -->
+        <div data-role="footer" data-theme='b'>
+            <h1>&copy; Copyright 2022 by Jackson Chu</h1>
+        </div>
+    </div>
+    <!------------------------------------------ End of Add Page -------------------------------------------->
+
+
+
+
+
+    <!---------------------------------------------- List Page ---------------------------------------------->
+    <div data-role="page" id="listPage">
+
+        <!--   page header -->
+        <div data-role="header" data-theme='a'>
+            <h1>My Favorite Restaurant List</h1>
+            <!-- navbar -->
+            <div data-role="navbar" data-theme='b'>
+                <ul>
+                    <li><a href="#homePage">Home</a></li>
+                    <li><a href="#addPage">Add Restaurant</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>
+                    <li><a href="#detailPage">Restaurant Detail</a></li>
+                    <li><a href="#updatePage">Update Details</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <!--   page content -->
+        <div data-role="content" data-theme='e'>
+            <p>Here are my Favorite Restaurants</p>
+            <div id="restaurantList">
+                <ul id="myul"></ul>
+            </div>
+
+
+            <br />  
+            This Will be List of Restaurant<br /><br />
+            1. Restaurant Name / City / Cuisine Style / Price<br />
+            2. Chipotle / Seattle / Mexican / $<br />
+            3. Five Guys / Issaquah / American / $$<br />
+            <br /><br /><br />
+            
+
+
+            <label for="select-sortBy">Sort By</label>
+            <select name="select-sortBy" id="select-sortBy">
+                <option value="SortLocation">City</option>
+                <option value="SortStyle">Cuisine Style</option>
+                <option value="SortName">Name</option>
+                <option value="SortPriceHigh">Price (High to Low)</option>
+                <option value="SortPriceLow">Price (Low to High)</option>
+            </select>
+        </div>
+
+        <!--   page footer -->
+        <div data-role="footer" data-theme='b'>
+            <h1>&copy; Copyright 2022 by Jackson Chu</h1>
+        </div>
+    </div>
+    <!------------------------------------------ End of List Page ------------------------------------------->
+
+
+
+
+
+    <!--------------------------------------------- Detail Page --------------------------------------------->
+    <div data-role="page" id="detailPage">
+
+        <!--   page header -->
+        <div data-role="header" data-theme='a'>
+            <h1>Restaurant Detail</h1>
+            <!-- navbar -->
+            <div data-role="navbar" data-theme='b'>
+                <ul>
+                    <li><a href="#homePage">Home</a></li>
+                    <li><a href="#addPage">Add Restaurant</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>
+                    <li><a href="#detailPage">Restaurant Detail</a></li>
+                    <li><a href="#updatePage">Update Details</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--   page content -->
+        <div data-role="content" data-theme='e'>
+            <p>Restaurant Detail (Will Open by clicking restaurant name from List Page</p>
+            Name: [Restaurant Name] <br /><br />
+            Cuisine Style: [Style Name] <br /><br />
+            Location: [City] <br /><br />
+            Price: [$$$] <br /><br /><br />
+
+            <div>
+                Date Visited: [mm/dd/yyyy]<br /><br />
+                Menu(s) Tried: [Sushi]<br /><br />
+            </div>
+            BUTTON For Restaurant Website
+            <br /><br />
+
+            <a href="#popupUpdate" data-rel="popup" data-transition="slideup"
+                class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Update</a>
+            <div data-role="popup" id="popupUpdate" data-theme="b">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                    <li data-role="list-divider">Choose an action</li>
+                    <li><a href="#updatePage" data-transition="flow">Update</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!--   page footer -->
+        <div data-role="footer" data-theme='b'>
+            <h1>&copy; Copyright 2022 by Jackson Chu</h1>
+        </div>
+    </div>
+    <!----------------------------------------- End of Detail Page ------------------------------------------>
+
+
+
+
+
+    <!--------------------------------------------- Update Page --------------------------------------------->
+    <div data-role="page" id="updatePage">
+
+        <!--   page header -->
+        <div data-role="header" data-theme='a'>
+            <h1>Update Restaurant</h1>
+            <!-- navbar -->
+            <div data-role="navbar" data-theme='b'>
+                <ul>
+                    <li><a href="#homePage">Home</a></li>
+                    <li><a href="#addPage">Add Restaurant</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>
+                    <li><a href="#detailPage">Restaurant Detail</a></li>
+                    <li><a href="#updatePage">Update Details</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--   page content -->
+        <div data-role="content" data-theme='e'>
+            <p>Update Restaurant (THIS PAGE WILL ADD USER'S SECOND, THIRD, etc. VISIT TO RESTAURANT AND ADD "DATE
+                VISITED" & "MENU TRIED")</p>
+            Name: [Shows Existing Restaurant Name] <br /><br />
+            Cuisine Style: [Shows existing style] <br /><br />
+            Location: [City] <br /><br />
+            ****NOTE: IF LOCATION CHANGES, CREATE A BUTTON THAT ENABLES USER TO WRITE ON TEXT INPUT TO CHANGE****
+            <br /><br />
+            Price: [$$$] <br /><br /><br />
+
+
+
+            Enter Date Visited <br />
+            <input type="text" value="" id="date" placeholder="mm/dd/yyyy" />
+            Enter Menu(s) Tried <br />
+            <input type="text" value="" id="menuTried" placeholder="e.g. Beef Wellington, Caesar Salad" />
+
+            <input type="button" value="Update" id="updateBtn" data-inline="true" />
+
+
+        </div>
+
+        <!--   page footer -->
+        <div data-role="footer" data-theme='b'>
+            <h1>&copy; Copyright 2022 by Jackson Chu</h1>
+        </div>
+    </div>
+    <!----------------------------------------- End of Update Page ------------------------------------------>
+
+
+
+</body>
+
+</html>
