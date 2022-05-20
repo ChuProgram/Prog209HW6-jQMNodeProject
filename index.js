@@ -16,10 +16,10 @@ let RestaurantObject = function (pName, pDate, pCity, pStyle, pMenu, pPrice, pUR
     this.NewMenu = pNewMenu;
 }
 
-let UpdatedRestaurantObject = function (pNewDate, pNewMenu) {
-    this.NewDate = pNewDate;
-    this.NewMenu = pNewMenu;
-}
+// let UpdatedRestaurantObject = function (pNewDate, pNewMenu) {
+//     this.NewDate = pNewDate;
+//     this.NewMenu = pNewMenu;
+// }
 
 restaurantArray.push(new RestaurantObject("Pizza Hut", "01/23/2009", "Redmond", "American", "Pepperoni Pizza", "$$$", ""));
 restaurantArray.push(new RestaurantObject("Chipotle", "01/02/2017", "Seattle", "Mexican", "Steak Burrito", "$", "www.asdas.com"));
