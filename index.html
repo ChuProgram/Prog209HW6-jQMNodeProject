@@ -110,10 +110,10 @@
 
             <label for="select-price">Select Price</label>
             <select name="select-price" id="select-price">
-                <option value="invalid">Select Price Range...</option>
-                <option value="3">$$$ (Expensive)</option>
-                <option value="2">$$ (Average)</option>
-                <option value="1">$ (Cheap)</option>
+                <option value="blank">Select Price Range...</option>
+                <option value="$$$">$$$ (Expensive)</option>
+                <option value="$$">$$ (Average)</option>
+                <option value="$">$ (Cheap)</option>
             </select>
 
             Enter Restaurant Website (if available)<br />
@@ -160,23 +160,16 @@
             <div id="restaurantList">
                 <ul id="myul"></ul>
             </div>
-
-
-            <br />  
-            1. Restaurant Name / City / Cuisine Style / Price<br />
-            2. Chipotle / Seattle / Mexican / $<br />
-            3. Five Guys / Issaquah / American / $$<br />
-            <br /><br /><br />
-            
-
+      
 
             <label for="select-sortBy">Sort By</label>
             <select name="select-sortBy" id="select-sortBy">
-                <option value="SortLocation">City</option>
-                <option value="SortStyle">Cuisine Style</option>
-                <option value="SortName">Name</option>
-                <option value="SortPriceHigh">Price (High to Low)</option>
-                <option value="SortPriceLow">Price (Low to High)</option>
+                <option value="default" id="default"></option> 
+                <option value="sortCity" id="sortCity">City</option>
+                <option value="sortStyle" id="sortStyle">Cuisine Style</option>
+                <option value="sortName" id="sortName">Name</option>
+                <option value="sortHtoL" id="sortHtoL">Price (High to Low)</option>
+                <option value="sortLtoH" id="sortLtoH">Price (Low to High)</option>
             </select>
         </div>
 
@@ -210,20 +203,24 @@
         </div>
 
         <!--   page content -->
-        <div data-role="content" data-theme='e'>
-            <strong>****NOTE:Will Open by clicking restaurant name from List Page</strong>
-            <p>Restaurant Detail</p>
-            Name: [Restaurant Name] <br /><br />
-            Cuisine Style: [Style Name] <br /><br />
-            Location: [City] <br /><br />
-            Price: [$$$] <br /><br /><br />
+        <div data-role="content" data-theme='e'>            
+            <p><b>Restaurant Detail</b></p> <br />
+            <p id="restaurantDetailsList"></p>
+            
+            <p id="updatedRestaurantList"></p>
 
-            <div>
-                Date Visited: [mm/dd/yyyy]<br /><br />
-                Menu(s) Tried: [Sushi]<br /><br />
-            </div>
-            BUTTON For Restaurant Website
-            <br /><br />
+            <b>What I want my code to look like after user add new date and menu from Update Details Page <br />
+            Example: <br /><br />
+            Date Visited: 05/06/2013 <br/>
+            Menu(s) Tried: Caesar Salad, New York Steak<br/><br />
+            Date Visited: 08/04/2016 <br/>
+            Menu(s) Tried: Mac N Cheese<br/>
+            </b>
+
+
+
+            <input type="button" value="Restaurant Website" id="websiteBtn" />
+            <br />
 
             <a href="#popupUpdate" data-rel="popup" data-transition="slideup"
                 class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Update</a>
@@ -269,20 +266,17 @@
         <div data-role="content" data-theme='e'>
             <strong>****NOTE: THIS PAGE WILL ADD USER'S SECOND, THIRD, etc. VISITS TO RESTAURANT AND ADD ANOTHER <br />"DATE
                 VISITED" & "MENU TRIED" INPUTS TO THE EXISTING LIST</strong>
-            <p>Update Restaurant</p>
-            Name: [Shows Existing Restaurant Name] <br /><br />
-            Cuisine Style: [Shows existing style] <br /><br />
-            Location: [City] <br /><br />
-            ****NOTE: IF LOCATION CHANGES, CREATE A BUTTON THAT ENABLES USER TO WRITE ON TEXT INPUT TO CHANGE****
-            <br /><br />
-            Price: [$$$] <br /><br /><br />
+            <p><b>Update Restaurant</b></p><br />
 
+            <p id="restaurantDetailsListOnUpdatedPage"></p>
 
+            <p id="updatedRestaurantDetailsListOnUpdatedPage"></p>
+                
 
             Enter Date Visited <br />
-            <input type="text" value="" id="date" placeholder="mm/dd/yyyy" />
+            <input type="text" value="" id="dateUpdate" placeholder="mm/dd/yyyy" />
             Enter Menu(s) Tried <br />
-            <input type="text" value="" id="menuTried" placeholder="e.g. Beef Wellington, Caesar Salad" />
+            <input type="text" value="" id="menuTriedUpdate" placeholder="e.g. Beef Wellington, Caesar Salad" />
 
             <input type="button" value="Update" id="updateBtn" data-inline="true" />
 
