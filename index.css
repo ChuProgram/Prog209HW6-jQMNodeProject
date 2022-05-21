@@ -10,3 +10,7 @@ h1 {
     font-weight:    bold;
     color:  rgb(24, 211, 117);
   }
+
+  #updatedList {
+    list-style: none;
+  }

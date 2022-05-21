@@ -21,9 +21,9 @@ let RestaurantObject = function (pName, pDate, pCity, pStyle, pMenu, pPrice, pUR
 //     this.NewMenu = pNewMenu;
 // }
 
-restaurantArray.push(new RestaurantObject("Pizza Hut", "01/23/2009", "Redmond", "American", "Pepperoni Pizza", "$$$", ""));
-restaurantArray.push(new RestaurantObject("Chipotle", "01/02/2017", "Seattle", "Mexican", "Steak Burrito", "$", "www.asdas.com"));
-restaurantArray.push(new RestaurantObject("Five Guys", "04/04/2019", "Issaquah", "American", "Cheeseburger w/ bacon", "$$", "https://www.fiveguys.com/"));
+restaurantArray.push(new RestaurantObject("Dominos", "01/23/2009", "Redmond", "American", "Pepperoni Pizza", "$$$", "", "", ""));
+restaurantArray.push(new RestaurantObject("Chipotle", "01/02/2017", "Seattle", "Mexican", "Steak Burrito", "$", "www.asdas.com", "", ""));
+restaurantArray.push(new RestaurantObject("Five Guys", "04/04/2019", "Issaquah", "American", "Cheeseburger w/ bacon", "$$", "https://www.fiveguys.com/", "", ""));
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -90,42 +90,71 @@ document.addEventListener("DOMContentLoaded", function () {
     // page before show code *************************************************************************
     $(document).on("pagebeforeshow", "#listPage", function (event) {   // have to use jQuery 
         createList();
-        //createUpdatedList();
     });
 
-    // need one for our details page to fill in the info based on the passed in ID
-    $(document).on("pagebeforeshow", "#detailPage", function (event) {
-        let restaurantDetailsList = localStorage.getItem("parm");  // get the unique key back from the storage dictionary called "parm"
-        document.getElementById("restaurantDetailsList").innerHTML = restaurantDetailsList;
-        document.getElementById("restaurantDetailsListOnUpdatedPage").innerHTML = restaurantDetailsList;
 
-        console.log(restaurantDetailsList);
+    // need one for our details page to fill in the info based on the passed in ID
+    $(document).on("pagebeforeshow", "#detailPage", "#updatePage", function (event) {
+        let restaurantID = localStorage.getItem("parm");  // get the unique key back from the storage dictionary called "parm"
+        restaurantArray = JSON.parse(localStorage.getItem("restArray"));
+
+        document.getElementById("nameDetail").innerHTML = "Name: " + restaurantArray[restaurantID - 1001].Name;
+        document.getElementById("styleDetail").innerHTML = "Cuisine Style: " + restaurantArray[restaurantID - 1001].Style;
+        document.getElementById("locationDetail").innerHTML = "City: " + restaurantArray[restaurantID - 1001].City;
+        document.getElementById("priceDetail").innerHTML = "Price: " + restaurantArray[restaurantID - 1001].Price;
+        document.getElementById("dateDetail").innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].Date;
+        document.getElementById("menuDetail").innerHTML = "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].Menu;
+
+        document.getElementById("updateDetailsPage").innerHTML = "Date & Menu(s) you've tried at " + "<b>" + restaurantArray[restaurantID - 1001].Name + "</b>";
+        document.getElementById("dateDetail2").innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].Date;
+        document.getElementById("menuDetail2").innerHTML = "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].Menu;
+
+
+
+        document.getElementById("updateBtn").addEventListener("click", function () {
+            let restaurantID = localStorage.getItem("parm");
+            restaurantArray = JSON.parse(localStorage.getItem("restArray"));
+
+            let newDate = document.getElementById("dateUpdate").value;
+            let newMenu = document.getElementById("menuTriedUpdate").value;
+            console.log(restaurantID);
+            restaurantArray[restaurantID - 1001].NewDate = newDate;
+            restaurantArray[restaurantID - 1001].NewMenu = newMenu;
+
+            let oldDate = newDate;
+            let oldMenu = newMenu;
+
+            let newArray = restaurantArray.map(item => {
+                if (item.NewDate === oldDate || item.NewMenu === oldMenu) {
+                    return {...item, NewDate: newDate, NewMenu: newMenu};
+                }
+                else {
+                    return item;
+                }
+            });
+
+            console.log(newArray);   
+            document.getElementById("dateUpdate").value = "";
+            document.getElementById("menuTriedUpdate").value = "";
+
+            let output = document.createElement("p");
+            document.getElementById("updatedList").appendChild(output);
+            console.log(newDate);
+            console.log(newMenu);
+            if (newDate === "" || newMenu === "") {
+                output.innerHTML = "";
+            }
+            else {
+                output.innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].NewDate + "<br />" +
+                                        "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].NewMenu + "<br />";
+            }
+        });
+
     });
 
     // end of page before show code *************************************************************************
-    document.getElementById("updateBtn").addEventListener("click", function () {
-        let newDate = document.getElementById("dateUpdate").value;
-        let newMenu = document.getElementById("menuTriedUpdate").value;
-    
-        restaurantArray.push(new RestaurantObject ("", "", "", "", "", "", "", newDate, newMenu));
-    
-        console.log(restaurantArray);
-        document.getElementById("dateUpdate").value = "";
-        document.getElementById("menuTriedUpdate").value = "";
-    
-        let updatedRestaurantDetailsList = localStorage.getItem("updated");
-        document.getElementById("updatedRestaurantList").innerHTML = updatedRestaurantDetailsList;
-        document.getElementById("updatedRestaurantDetailsListOnUpdatedPage").innerHTML = updatedRestaurantDetailsList;
-        console.log(updatedRestaurantDetailsList);
-    
-        document.location.href = "index.html#detailPage";
-    });
 });
 // end of wait until document has loaded event  *************************************************************************
-
-
-// update button event
-//document.getElementById("updateBtn").addEventListener("click", updateList);
 
 
 function createList() {
@@ -140,15 +169,7 @@ function createList() {
 
         // use the html5 "data-parm" to store the details of this particular restaurant object 
         // that we are currently building an li for so that I can later know which restaurant this li came from
-        li.setAttribute("data-parm", "Name: " + element.Name + "<br><br>" +
-                                     "Cuisine Style: " + element.Style + "<br><br>" +
-                                     "Location: " + element.City + "<br><br>" +
-                                     "Price: " + element.Price + "<br><br><br>" +
-                                     "Date Visited: " + element.Date + "<br><br>" +
-                                     "Menu(s) Tried: " + element.Menu + "<br><br>");
-
-        li.setAttribute("data-updated", "Date Visited: " + element.NewDate + "<br><br>" +
-                                        "Menu(s) Tried: " + element.NewMenu + "<br><br>");
+        li.setAttribute("data-parm", element.ID);
 
         theList.appendChild(li);
     });
@@ -160,48 +181,17 @@ function createList() {
     newRestaurantArray.forEach(function (element,) {
         element.addEventListener('click', function () {
             let parm = this.getAttribute("data-parm");  // data-parm has this restaurant object's details
-            let updated = this.getAttribute("data-updated");  // data-parm has this restaurant object's details
             localStorage.setItem("parm", parm);         // now save THIS DETAILS in the localStorage called "parm"
-            localStorage.setItem("updated", updated);
+
+            let stringRestArray = JSON.stringify(restaurantArray);
+            localStorage.setItem("restArray", stringRestArray);
+
             document.location.href = "index.html#detailPage";
         });
     });
 
 };
 
-
-// function updateList() {
-//     let updatedList = new UpdatedRestaurantObject (
-//         document.getElementById("dateUpdate").value,
-//         document.getElementById("menuTriedUpdate").value
-//     );
-//     updatedRestaurantArray.push(updatedList);
-//     document.getElementById("dateUpdate").value = "";
-//     document.getElementById("menuTriedUpdate").value = "";
-
-//     // clear all list when user clicks "Show Movies" button
-//     document.getElementById("updatedRestaurantList").innerHTML = "";
-//     document.getElementById("updatedRestaurantDetailsListOnUpdatedPage").innerHTML = "";
-
-//     // create "unordered list" element 
-//     let liList = document.createElement('li');
-
-//     // convert "movieList" section into unordered list
-//     document.getElementById("updatedRestaurantList").appendChild(liList);
-//     document.getElementById("updatedRestaurantDetailsListOnUpdatedPage").appendChild(liList);
-
-//     for (let i in updatedRestaurantArray) {             
-//         let li = document.createElement('li');  // create "list" element   
-//         liList.appendChild(li);                     // add list to unordered list
-//         liList.innerHTML = updatedRestaurantArray[i].GetAll();  // display string output
-//     }
-// };
-
-
-// UpdatedRestaurantObject.prototype.GetAll = function() {
-//     return "Date Visited: " + this.NewDate + "<br><br>" +
-//            "Menu(s) Tried: " + this.NewMenu + "<br><br>";
-// };
 
 function sortByName() {
     restaurantArray.sort(function (a, b) {
