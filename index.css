@@ -2,15 +2,38 @@ h1 {
     color: rgb(12, 145, 78);
   }
   
-  .newFont
+#addHeader, #listHeader, #detailsHeader {
+    color: rgb(49, 26, 226);
+}
+
+.newFont
   {
-    
-    font-family: 'Nova Flat';font-size: 22px;
+    font-family: 'MayinsHandRegular';
+    font-weight: normal;
+    font-style: normal;
+    text-align:center;
+    font-size: 40px;
+    /* font-family: 'Nova Flat';font-size: 22px;
     font-size:      40px;
-    font-weight:    bold;
+    font-weight:    bold; */
     color:  rgb(24, 211, 117);
   }
 
-  #updatedList {
-    list-style: none;
-  }
+#webDetail {
+  background-color:rgb(170, 0, 255);
+  width:100%;
+  font-weight: bold;
+  font-size: 22px;
+  text-align:center;
+}
+
+.oneRestaurant {
+    color: rgb(255, 3, 3);
+    line-height:33px;
+}
+  
+#listLabel {
+  color:rgb(50, 165, 42);
+  margin-left:40px;
+  font-size:20px;
+}

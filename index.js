@@ -98,57 +98,57 @@ document.addEventListener("DOMContentLoaded", function () {
         let restaurantID = localStorage.getItem("parm");  // get the unique key back from the storage dictionary called "parm"
         restaurantArray = JSON.parse(localStorage.getItem("restArray"));
 
-        document.getElementById("nameDetail").innerHTML = "Name: " + restaurantArray[restaurantID - 1001].Name;
-        document.getElementById("styleDetail").innerHTML = "Cuisine Style: " + restaurantArray[restaurantID - 1001].Style;
-        document.getElementById("locationDetail").innerHTML = "City: " + restaurantArray[restaurantID - 1001].City;
-        document.getElementById("priceDetail").innerHTML = "Price: " + restaurantArray[restaurantID - 1001].Price;
-        document.getElementById("dateDetail").innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].Date;
-        document.getElementById("menuDetail").innerHTML = "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].Menu;
+        document.getElementById("nameDetail").innerHTML = "Name: " + "<b>" + restaurantArray[restaurantID - 1001].Name + "</b>";
+        document.getElementById("styleDetail").innerHTML = "Cuisine Style: " + "<b>" + restaurantArray[restaurantID - 1001].Style + "</b>";
+        document.getElementById("locationDetail").innerHTML = "City: " + "<b>" + restaurantArray[restaurantID - 1001].City + "</b>";
+        document.getElementById("priceDetail").innerHTML = "Price: " + "<b>" + restaurantArray[restaurantID - 1001].Price + "</b>";
+        document.getElementById("dateDetail").innerHTML = "Date Visited: " + "<b>" + restaurantArray[restaurantID - 1001].Date + "</b>";
+        document.getElementById("menuDetail").innerHTML = "Favorite Menu(s): " + "<b>" + restaurantArray[restaurantID - 1001].Menu + "</b>";
+            
+        // document.getElementById("updateDetailsPage").innerHTML = "Date & Menu(s) you've tried at " + "<b>" + restaurantArray[restaurantID - 1001].Name + "</b>";
+        // document.getElementById("dateDetail2").innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].Date;
+        // document.getElementById("menuDetail2").innerHTML = "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].Menu;
 
-        document.getElementById("updateDetailsPage").innerHTML = "Date & Menu(s) you've tried at " + "<b>" + restaurantArray[restaurantID - 1001].Name + "</b>";
-        document.getElementById("dateDetail2").innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].Date;
-        document.getElementById("menuDetail2").innerHTML = "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].Menu;
 
 
+    //     document.getElementById("updateBtn").addEventListener("click", function () {
+    //         let restaurantID = localStorage.getItem("parm");
+    //         restaurantArray = JSON.parse(localStorage.getItem("restArray"));
 
-        document.getElementById("updateBtn").addEventListener("click", function () {
-            let restaurantID = localStorage.getItem("parm");
-            restaurantArray = JSON.parse(localStorage.getItem("restArray"));
+    //         let newDate = document.getElementById("dateUpdate").value;
+    //         let newMenu = document.getElementById("menuTriedUpdate").value;
+    //         console.log(restaurantID);
+    //         restaurantArray[restaurantID - 1001].NewDate = newDate;
+    //         restaurantArray[restaurantID - 1001].NewMenu = newMenu;
 
-            let newDate = document.getElementById("dateUpdate").value;
-            let newMenu = document.getElementById("menuTriedUpdate").value;
-            console.log(restaurantID);
-            restaurantArray[restaurantID - 1001].NewDate = newDate;
-            restaurantArray[restaurantID - 1001].NewMenu = newMenu;
+    //         let oldDate = newDate;
+    //         let oldMenu = newMenu;
 
-            let oldDate = newDate;
-            let oldMenu = newMenu;
+    //         let newArray = restaurantArray[restaurantID - 1001].map(item => {
+    //             if (item.NewDate === oldDate || item.NewMenu === oldMenu) {
+    //                 return {...item, NewDate: newDate, NewMenu: newMenu};
+    //             }
+    //             else {
+    //                 return item;
+    //             }
+    //         });
+            
+    //         console.log(newArray);   
+    //         document.getElementById("dateUpdate").value = "";
+    //         document.getElementById("menuTriedUpdate").value = "";
 
-            let newArray = restaurantArray.map(item => {
-                if (item.NewDate === oldDate || item.NewMenu === oldMenu) {
-                    return {...item, NewDate: newDate, NewMenu: newMenu};
-                }
-                else {
-                    return item;
-                }
-            });
-
-            console.log(newArray);   
-            document.getElementById("dateUpdate").value = "";
-            document.getElementById("menuTriedUpdate").value = "";
-
-            let output = document.createElement("p");
-            document.getElementById("updatedList").appendChild(output);
-            console.log(newDate);
-            console.log(newMenu);
-            if (newDate === "" || newMenu === "") {
-                output.innerHTML = "";
-            }
-            else {
-                output.innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].NewDate + "<br />" +
-                                        "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].NewMenu + "<br />";
-            }
-        });
+    //         let output = document.createElement("p");
+    //         document.getElementById("updatedList").appendChild(output);
+    //         console.log(newDate);
+    //         console.log(newMenu);
+    //         if (newDate === "" || newMenu === "") {
+    //             output.innerHTML = "";
+    //         }
+    //         else {
+    //             output.innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].NewDate + "<br />" +
+    //                                     "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].NewMenu + "<br />";
+    //         }
+    //     });
 
     });
 

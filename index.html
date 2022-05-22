@@ -6,7 +6,8 @@
     <name>jQuery Mobile: Course Project</name>
     <!-- <documentation at http://demos.jquerymobile.com/1.4.1/ > -->
 
-    <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/mayin-s-hand" type="text/css"/>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -30,9 +31,7 @@
                 <ul>
                     <li><a href="#homePage">Home</a></li>
                     <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>
-                    <li><a href="#detailPage">Restaurant Detail</a></li>
-                    <li><a href="#updatePage">Update Details</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
@@ -41,15 +40,10 @@
         <div data-role="content" data-theme='b'>
             <div class="newFont">
                 <h2>Welcome to Washington Foodie</h2>
-                <h3>Tastiest places in The Evergreen State</h3>
+                <h3>Tastiest Places in The Evergreen State</h3>
             </div>
+            <p id="webDetail">&hearts; &hearts; &hearts; Save Your Favorite Restaurants in Washington State! &hearts; &hearts; &hearts;</p>
         </div>
-
-
-        <br />
-        <strong>****NOTE: This Website will be used for those who want to save their favorite restaurant in WASHINGTON state and its details.
-        </strong>
-
 
         <!-- page footer -->
         <div data-role="footer" data-theme='b'>
@@ -73,20 +67,17 @@
                 <ul>
                     <li><a href="#homePage">Home</a></li>
                     <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>
-                    <li><a href="#detailPage">Restaurant Detail</a></li>
-                    <li><a href="#updatePage">Update Details</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
 
         <!-- page content -->
         <div data-role="content" data-theme='c'>
-            <strong>***NOTE: THIS PAGE WILL LET USER ADD NEW RESTAURANT</strong>
-            <h2>Enter a new Restaurant</h2>
+            <h2 id="addHeader">Enter a New Restaurant</h2>
             <br />
 
-            <a href="#popupMenu" data-rel="popup" data-transition="slideup"
+            <!-- <a href="#popupMenu" data-rel="popup" data-transition="slideup"
                 class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Name Already Exists?</a>
             <div data-role="popup" id="popupMenu" data-theme="b">
                 <ul data-role="listview" data-inset="true" style="min-width:210px;">
@@ -94,9 +85,9 @@
                     <li><a href="#listPage" data-transition="flow">Go to List</a></li>
                 </ul>
             </div>
-            <br /><br /><br />
+            <br /><br /><br /> -->
 
-            Enter Restaurant Name <br />
+            <b>Enter Restaurant Name <br />
             <input type="text" value="" id="name" placeholder="Restaurant Name" />
             Enter Date Visited <br />
             <input type="text" value="" id="date" placeholder="mm/dd/yyyy" />
@@ -104,11 +95,11 @@
             <input type="text" value="" id="city" placeholder="City" />
             Enter Cuisine Style <br />
             <input type="text" value="" id="cuisine" placeholder="e.g. Japanese, American, etc." />
-            Enter Menu(s) Tried <br />
+            Enter Favorite Menu(s) <br />
             <input type="text" value="" id="menuTried" placeholder="e.g. Beef Wellington, Caesar Salad" />
 
 
-            <label for="select-price">Select Price</label>
+            <label for="select-price"><b>Select Price</b></label>
             <select name="select-price" id="select-price">
                 <option value="blank">Select Price Range...</option>
                 <option value="$$$">$$$ (Expensive)</option>
@@ -117,7 +108,7 @@
             </select>
 
             Enter Restaurant Website (if available)<br />
-            <input type="text" value="" id="website" placeholder="URL" />
+            <input type="text" value="" id="website" placeholder="URL" /></b>
 
             <input type="button" value="Click To Add Restaurant" id="addBtn" data-inline="true" />
             <input type="button" value="Clear Data" id="clearBtn" data-inline="true" />
@@ -145,18 +136,15 @@
                 <ul>
                     <li><a href="#homePage">Home</a></li>
                     <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>
-                    <li><a href="#detailPage">Restaurant Detail</a></li>
-                    <li><a href="#updatePage">Update Details</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>                   
                 </ul>
             </div>
 
         </div>
         <!--   page content -->
         <div data-role="content" data-theme='e'>
-            <strong>****NOTE: This Will be List of Restaurant (Will contain "ul" with active "li". <br/>
-            When user clicks the "li" (or name of restaurant) it will go to Restaurant Detail page of the web.</strong><br /><br />
-            <p>Here are my Favorite Restaurants</p>
+            <h2 id="listHeader">Here are my Favorite Restaurants</h2>
+            <p id="listLabel">Name / City / Cuisine / Price</p>
             <div id="restaurantList">
                 <ul id="myul"></ul>
             </div>
@@ -165,9 +153,9 @@
             <label for="select-sortBy">Sort By</label>
             <select name="select-sortBy" id="select-sortBy">
                 <option value="default" id="default"></option> 
+                <option value="sortName" id="sortName">Name</option>
                 <option value="sortCity" id="sortCity">City</option>
                 <option value="sortStyle" id="sortStyle">Cuisine Style</option>
-                <option value="sortName" id="sortName">Name</option>
                 <option value="sortHtoL" id="sortHtoL">Price (High to Low)</option>
                 <option value="sortLtoH" id="sortLtoH">Price (Low to High)</option>
             </select>
@@ -195,48 +183,36 @@
                 <ul>
                     <li><a href="#homePage">Home</a></li>
                     <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>
-                    <li><a href="#detailPage">Restaurant Detail</a></li>
-                    <li><a href="#updatePage">Update Details</a></li>
+                    <li><a href="#listPage">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
 
         <!--   page content -->
         <div data-role="content" data-theme='e'>            
-            <p><b>Restaurant Detail</b></p> <br />
+            <h2 id="detailsHeader">Restaurant Detail</h2>
             <p id="nameDetail"></p>
             <p id="styleDetail"></p>
             <p id="locationDetail"></p>
-            <p id="priceDetail"></p><br/>
+            <p id="priceDetail"></p>
             <p id="dateDetail"></p>
             <p id="menuDetail"></p><br/>
 
-            <div id="updatedList">
+            <!-- <div id="updatedList">
 
-            </div>
-
-            <b>What I want my code to look like after user add new date and menu from Update Details Page <br />
-            Example: <br /><br />
-            Date Visited: 05/06/2013 <br/>
-            Menu(s) Tried: Caesar Salad, New York Steak<br/><br />
-            Date Visited: 08/04/2016 <br/>
-            Menu(s) Tried: Mac N Cheese<br/>
-            </b>
-
-
+            </div> -->
 
             <input type="button" value="Restaurant Website" id="websiteBtn" />
             <br />
 
-            <a href="#popupUpdate" data-rel="popup" data-transition="slideup"
+            <!-- <a href="#popupUpdate" data-rel="popup" data-transition="slideup"
                 class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Update</a>
             <div data-role="popup" id="popupUpdate" data-theme="b">
                 <ul data-role="listview" data-inset="true" style="min-width:210px;">
                     <li data-role="list-divider">Choose an action</li>
                     <li><a href="#updatePage" data-transition="flow">Update</a></li>
                 </ul>
-            </div>
+            </div> -->
 
         </div>
 
@@ -250,14 +226,19 @@
 
 
 
-
+    
     <!--------------------------------------------- Update Page --------------------------------------------->
-    <div data-role="page" id="updatePage">
+    <!-- 
+        <div data-role="page" id="updatePage"> 
+            -->
 
         <!--   page header -->
+        <!--
         <div data-role="header" data-theme='a'>
             <h1>Update Restaurant</h1>
+        -->
             <!-- navbar -->
+            <!--
             <div data-role="navbar" data-theme='b'>
                 <ul>
                     <li><a href="#homePage">Home</a></li>
@@ -268,8 +249,10 @@
                 </ul>
             </div>
         </div>
+        -->
 
         <!--   page content -->
+        <!--
         <div data-role="content" data-theme='e'>
             <strong>****NOTE: THIS PAGE WILL ADD USER'S SECOND, THIRD, etc. VISITS TO RESTAURANT AND ADD ANOTHER <br />"DATE
                 VISITED" & "MENU TRIED" INPUTS TO THE EXISTING LIST</strong>
@@ -289,14 +272,17 @@
 
 
         </div>
+        -->
 
         <!--   page footer -->
+        <!--
         <div data-role="footer" data-theme='b'>
             <h1>&copy; Copyright 2022 by Jackson Chu</h1>
         </div>
     </div>
-    <!----------------------------------------- End of Update Page ------------------------------------------>
-
+        -->
+    <!----------------------------------------- End of Update Page ---------------------------------------- -->
+    
 
 
 </body>
