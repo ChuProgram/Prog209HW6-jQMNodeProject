@@ -1,25 +1,26 @@
 // start by creating data so we don't have to type it in each time
 let restaurantArray = [];
-let updatedRestaurantArray = [];
 
 // define a constructor to create restaurant objects
-let RestaurantObject = function (pName, pDate, pCity, pStyle, pMenu, pPrice, pURL, pNewDate, pNewMenu) {
+let RestaurantObject = function (pName, pDate, pCity, pStyle, pMenu, pPrice, pURL) {
+    this.ID = Math.random().toString(16).slice(5);
     this.Name = pName;
     this.Date = pDate;
-    this.ID = 1000 + restaurantArray.length + 1;
     this.City = pCity;
     this.Style = pStyle;
     this.Menu = pMenu;
     this.Price = pPrice;
     this.URL = pURL;
-    this.NewDate = pNewDate;
-    this.NewMenu = pNewMenu;
+    // store visit info in an array of Visit objects
+    this.VisitArray = [new Visit(pDate, pMenu)] ;  // load the 1st visit into the Visit array
 }
 
-// let UpdatedRestaurantObject = function (pNewDate, pNewMenu) {
-//     this.NewDate = pNewDate;
-//     this.NewMenu = pNewMenu;
-// }
+// create new objects to hold visit data
+let Visit = function(pDate, pMenu)
+{
+    this.Date = pDate;
+    this.Menu = pMenu;
+}
 
 restaurantArray.push(new RestaurantObject("Dominos", "01/23/2009", "Redmond", "American", "Pepperoni Pizza", "$$$", "", "", ""));
 restaurantArray.push(new RestaurantObject("Chipotle", "01/02/2017", "Seattle", "Mexican", "Steak Burrito", "$", "www.asdas.com", "", ""));
@@ -28,7 +29,7 @@ restaurantArray.push(new RestaurantObject("Five Guys", "04/04/2019", "Issaquah",
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    //createList();
+    createList();
 
     // add button event
     document.getElementById("addBtn").addEventListener("click", function () {
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(restaurantArray);
     });
 
+
     // clear button event
     document.getElementById("clearBtn").addEventListener("click", function () {
         document.getElementById("name").value = "";
@@ -46,11 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("city").value = "";
         document.getElementById("cuisine").value = "";
         document.getElementById("menuTried").value = "";
-        document.getElementById("select-price").value = "blank";   // why not working?????
         document.getElementById("website").value = "";
     });
 
 
+    // delete button event
+    document.getElementById("delete").addEventListener("click", function () {
+        let localParm = localStorage.getItem("parm");  // get the unique key back from the dictionary
+        deleteRestaurant(localParm);
+        createList();  // recreate li list after removing one
+        document.location.href = "index.html#listPage";  // go back to restaurant list 
+    });
+
+
+    // website button event
     document.getElementById("websiteBtn").addEventListener("click", function () {
         let websiteURL = document.getElementById("website").value;
         if (websiteURL === "") {
@@ -92,97 +103,80 @@ document.addEventListener("DOMContentLoaded", function () {
         createList();
     });
 
+    document.getElementById("updateVisitBtn").addEventListener("click", function () {
+        let newDate = document.getElementById("newDate").value;
+        let newMenu = document.getElementById("newMenuTried").value;
+        let localParm = localStorage.getItem("parm");  // get the unique key back from the storage dictionary called "parm"
+        let restaurantID = GetArrayPointer(localParm); // map to which array element it is 
+        
+        // push new date and menu to VisitArray, which is inside restaurantArray
+        restaurantArray[restaurantID].VisitArray.push(new Visit(newDate, newMenu));
 
-    // need one for our details page to fill in the info based on the passed in ID
-    $(document).on("pagebeforeshow", "#detailPage", "#updatePage", function (event) {
-        let restaurantID = localStorage.getItem("parm");  // get the unique key back from the storage dictionary called "parm"
-        restaurantArray = JSON.parse(localStorage.getItem("restArray"));
+        document.getElementById("newDate").value = "";
+        document.getElementById("newMenuTried").value = "";
 
-        document.getElementById("nameDetail").innerHTML = "Name: " + "<b>" + restaurantArray[restaurantID - 1001].Name + "</b>";
-        document.getElementById("styleDetail").innerHTML = "Cuisine Style: " + "<b>" + restaurantArray[restaurantID - 1001].Style + "</b>";
-        document.getElementById("locationDetail").innerHTML = "City: " + "<b>" + restaurantArray[restaurantID - 1001].City + "</b>";
-        document.getElementById("priceDetail").innerHTML = "Price: " + "<b>" + restaurantArray[restaurantID - 1001].Price + "</b>";
-        document.getElementById("dateDetail").innerHTML = "Date Visited: " + "<b>" + restaurantArray[restaurantID - 1001].Date + "</b>";
-        document.getElementById("menuDetail").innerHTML = "Favorite Menu(s): " + "<b>" + restaurantArray[restaurantID - 1001].Menu + "</b>";
-            
-        // document.getElementById("updateDetailsPage").innerHTML = "Date & Menu(s) you've tried at " + "<b>" + restaurantArray[restaurantID - 1001].Name + "</b>";
-        // document.getElementById("dateDetail2").innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].Date;
-        // document.getElementById("menuDetail2").innerHTML = "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].Menu;
-
-
-
-    //     document.getElementById("updateBtn").addEventListener("click", function () {
-    //         let restaurantID = localStorage.getItem("parm");
-    //         restaurantArray = JSON.parse(localStorage.getItem("restArray"));
-
-    //         let newDate = document.getElementById("dateUpdate").value;
-    //         let newMenu = document.getElementById("menuTriedUpdate").value;
-    //         console.log(restaurantID);
-    //         restaurantArray[restaurantID - 1001].NewDate = newDate;
-    //         restaurantArray[restaurantID - 1001].NewMenu = newMenu;
-
-    //         let oldDate = newDate;
-    //         let oldMenu = newMenu;
-
-    //         let newArray = restaurantArray[restaurantID - 1001].map(item => {
-    //             if (item.NewDate === oldDate || item.NewMenu === oldMenu) {
-    //                 return {...item, NewDate: newDate, NewMenu: newMenu};
-    //             }
-    //             else {
-    //                 return item;
-    //             }
-    //         });
-            
-    //         console.log(newArray);   
-    //         document.getElementById("dateUpdate").value = "";
-    //         document.getElementById("menuTriedUpdate").value = "";
-
-    //         let output = document.createElement("p");
-    //         document.getElementById("updatedList").appendChild(output);
-    //         console.log(newDate);
-    //         console.log(newMenu);
-    //         if (newDate === "" || newMenu === "") {
-    //             output.innerHTML = "";
-    //         }
-    //         else {
-    //             output.innerHTML = "Date Visited: " + restaurantArray[restaurantID - 1001].NewDate + "<br />" +
-    //                                     "Menu(s) Tried: " + restaurantArray[restaurantID - 1001].NewMenu + "<br />";
-    //         }
-    //     });
-
+        document.location.href = "index.html#listPage";
     });
 
-    // end of page before show code *************************************************************************
+    // need one for our details page to fill in the info based on the passed in ID
+    $(document).on("pagebeforeshow", "#detailPage", function (event) {
+        let localParm = localStorage.getItem("parm");  // get the unique key back from the storage dictionary called "parm"
+        let restaurantID = GetArrayPointer(localParm); // map to which array element it is 
+        restaurantArray = JSON.parse(localStorage.getItem("restArray"));
+
+        document.getElementById("nameDetail").innerHTML = "Name: " + "<b>" + restaurantArray[restaurantID].Name + "</b>";
+        document.getElementById("styleDetail").innerHTML = "Cuisine Style: " + "<b>" + restaurantArray[restaurantID].Style + "</b>";
+        document.getElementById("locationDetail").innerHTML = "City: " + "<b>" + restaurantArray[restaurantID].City + "</b>";
+        document.getElementById("priceDetail").innerHTML = "Price: " + "<b>" + restaurantArray[restaurantID].Price + "</b>";
+       
+        // clear prior data
+        let theVisitList = document.getElementById("pastVisits");
+        theVisitList.innerHTML = "";
+
+        // display updated visit list
+        restaurantArray[restaurantID].VisitArray.forEach(function (element) {   
+            let li = document.createElement("li");
+            li.innerHTML = "Date Visited: " + "<b>" + element.Date + "</b>" + "<br />"  + "Menu(s) Tried: " + "<b>" + element.Menu + "</b>" + "<br /> <br /> ";
+            theVisitList.appendChild(li);
+        });
+    });
+
+        // end of page before show code *************************************************************************
 });
 // end of wait until document has loaded event  *************************************************************************
 
 
 function createList() {
     // clear prior data
-    let theList = document.getElementById("myul");
+    let theList = document.getElementById("myRestaurantList");
     theList.innerHTML = "";
+    while (myRestaurantList.firstChild) {    // remove any old data so don't get duplicates
+        myRestaurantList.removeChild(myRestaurantList.firstChild);
+    };
 
     restaurantArray.forEach(function (element,) {   // use handy array forEach method
         let li = document.createElement('li');
         li.classList.add('oneRestaurant');
-        li.innerHTML = element.Name + " / " + element.City + " / " + element.Style + " / " + element.Price;
 
         // use the html5 "data-parm" to store the details of this particular restaurant object 
         // that we are currently building an li for so that I can later know which restaurant this li came from
         li.setAttribute("data-parm", element.ID);
+
+        li.innerHTML = element.Name + " / " + element.City + " / " + element.Style + " / " + element.Price;
 
         theList.appendChild(li);
     });
 
 
     let classList = document.getElementsByClassName("oneRestaurant");
-    let newRestaurantArray = Array.from(classList);
 
-    newRestaurantArray.forEach(function (element,) {
+    Array.from(classList).forEach(function (element,) {
         element.addEventListener('click', function () {
             let parm = this.getAttribute("data-parm");  // data-parm has this restaurant object's details
             localStorage.setItem("parm", parm);         // now save THIS DETAILS in the localStorage called "parm"
-
+            
+            // to get around a "bug" in jQuery Mobile, take a snapshot of the
+            // current restaurant array and save it to localStorage     
             let stringRestArray = JSON.stringify(restaurantArray);
             localStorage.setItem("restArray", stringRestArray);
 
@@ -191,6 +185,23 @@ function createList() {
     });
 
 };
+
+
+// remove a movie from array
+function deleteRestaurant(which) {
+    let arrayPointer = GetArrayPointer(which);
+    restaurantArray.splice(arrayPointer, 1);  // remove 1 element at index 
+}
+
+
+// cycles thru the array to find the array element with a matching ID
+function GetArrayPointer(localID) {
+    for (let i = 0; i < restaurantArray.length; i++) {
+        if (localID === restaurantArray[i].ID) {
+            return i;
+        }
+    }
+}
 
 
 function sortByName() {

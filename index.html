@@ -24,14 +24,14 @@
     <div data-role="page" id="homePage">
 
         <!-- page header -->
-        <div data-role="header" data-theme='a'>
+        <div data-role="header" data-theme='b'>
             <h1>Washington Foodie (WaFoo)</h1>
             <!-- navbar -->
             <div data-role="navbar" data-theme='b'>
                 <ul>
-                    <li><a href="#homePage">Home</a></li>
-                    <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>                    
+                    <li><a href="#homePage" data-icon="home">Home</a></li>
+                    <li><a href="#addPage" data-icon="plus">Add Restaurant</a></li>
+                    <li><a href="#listPage" data-icon="grid">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
@@ -60,14 +60,14 @@
     <div data-role="page" id="addPage">
 
         <!-- page header -->
-        <div data-role="header" data-theme='a'>
+        <div data-role="header" data-theme='b'>
             <h1>Add a Restaurant</h1>
             <!-- navbar -->
             <div data-role="navbar" data-theme='b'>
                 <ul>
-                    <li><a href="#homePage">Home</a></li>
-                    <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>                    
+                    <li><a href="#homePage" data-icon="home">Home</a></li>
+                    <li><a href="#addPage" data-icon="plus">Add Restaurant</a></li>
+                    <li><a href="#listPage" data-icon="grid">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
@@ -77,16 +77,6 @@
             <h2 id="addHeader">Enter a New Restaurant</h2>
             <br />
 
-            <!-- <a href="#popupMenu" data-rel="popup" data-transition="slideup"
-                class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Name Already Exists?</a>
-            <div data-role="popup" id="popupMenu" data-theme="b">
-                <ul data-role="listview" data-inset="true" style="min-width:210px;">
-                    <li data-role="list-divider">Choose an action</li>
-                    <li><a href="#listPage" data-transition="flow">Go to List</a></li>
-                </ul>
-            </div>
-            <br /><br /><br /> -->
-
             <b>Enter Restaurant Name <br />
             <input type="text" value="" id="name" placeholder="Restaurant Name" />
             Enter Date Visited <br />
@@ -95,8 +85,8 @@
             <input type="text" value="" id="city" placeholder="City" />
             Enter Cuisine Style <br />
             <input type="text" value="" id="cuisine" placeholder="e.g. Japanese, American, etc." />
-            Enter Favorite Menu(s) <br />
-            <input type="text" value="" id="menuTried" placeholder="e.g. Beef Wellington, Caesar Salad" />
+            Enter Menu(s) Tried <br />
+            <input type="text" value="" id="menuTried" placeholder="e.g. New York Steak, Caesar Salad" />
 
 
             <label for="select-price"><b>Select Price</b></label>
@@ -110,7 +100,8 @@
             Enter Restaurant Website (if available)<br />
             <input type="text" value="" id="website" placeholder="URL" /></b>
 
-            <input type="button" value="Click To Add Restaurant" id="addBtn" data-inline="true" />
+            <br />
+            <input type="button" value="Add Restaurant" id="addBtn" data-inline="true" />
             <input type="button" value="Clear Data" id="clearBtn" data-inline="true" />
         </div>
 
@@ -129,27 +120,26 @@
     <div data-role="page" id="listPage">
 
         <!--   page header -->
-        <div data-role="header" data-theme='a'>
+        <div data-role="header" data-theme='b'>
             <h1>My Favorite Restaurant List</h1>
             <!-- navbar -->
             <div data-role="navbar" data-theme='b'>
                 <ul>
-                    <li><a href="#homePage">Home</a></li>
-                    <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>                   
+                    <li><a href="#homePage" data-icon="home">Home</a></li>
+                    <li><a href="#addPage" data-icon="plus">Add Restaurant</a></li>
+                    <li><a href="#listPage" data-icon="grid">List Restaurants</a></li>                   
                 </ul>
             </div>
-
         </div>
+
         <!--   page content -->
         <div data-role="content" data-theme='e'>
             <h2 id="listHeader">Here are my Favorite Restaurants</h2>
             <p id="listLabel">Name / City / Cuisine / Price</p>
             <div id="restaurantList">
-                <ul id="myul"></ul>
+                <ul id="myRestaurantList"></ul>
             </div>
       
-
             <label for="select-sortBy">Sort By</label>
             <select name="select-sortBy" id="select-sortBy">
                 <option value="default" id="default"></option> 
@@ -176,14 +166,14 @@
     <div data-role="page" id="detailPage">
 
         <!--   page header -->
-        <div data-role="header" data-theme='a'>
+        <div data-role="header" data-theme='b'>
             <h1>Restaurant Detail</h1>
             <!-- navbar -->
             <div data-role="navbar" data-theme='b'>
                 <ul>
-                    <li><a href="#homePage">Home</a></li>
-                    <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>                    
+                    <li><a href="#homePage" data-icon="home">Home</a></li>
+                    <li><a href="#addPage" data-icon="plus">Add Restaurant</a></li>
+                    <li><a href="#listPage" data-icon="grid">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
@@ -198,23 +188,24 @@
             <p id="dateDetail"></p>
             <p id="menuDetail"></p><br/>
 
-            <!-- <div id="updatedList">
-
-            </div> -->
-
             <input type="button" value="Restaurant Website" id="websiteBtn" />
             <br />
 
-            <!-- <a href="#popupUpdate" data-rel="popup" data-transition="slideup"
-                class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Update</a>
+            <h2 id="pastVisitsHeader">Past Visits</h2>
+            <ul id="pastVisits"></ul>
+
+            <br /><br />
+            <a href="#popupUpdate" data-rel="popup" data-transition="slideup"
+                class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-star ui-btn-icon-left ui-btn-a">Add New Visit</a>
             <div data-role="popup" id="popupUpdate" data-theme="b">
                 <ul data-role="listview" data-inset="true" style="min-width:210px;">
-                    <li data-role="list-divider">Choose an action</li>
-                    <li><a href="#updatePage" data-transition="flow">Update</a></li>
+                    <li data-role="list-divider">Would you like to add another visit?</li>
+                    <li><a href="#updatePage" data-transition="flow">Add</a></li>
                 </ul>
-            </div> -->
-
+            </div>
         </div>
+
+        <input type="button" value="Delete" id="delete" />
 
         <!--   page footer -->
         <div data-role="footer" data-theme='b'>
@@ -226,64 +217,40 @@
 
 
 
-    
+
     <!--------------------------------------------- Update Page --------------------------------------------->
-    <!-- 
-        <div data-role="page" id="updatePage"> 
-            -->
+    <div data-role="page" id="updatePage">
 
         <!--   page header -->
-        <!--
-        <div data-role="header" data-theme='a'>
-            <h1>Update Restaurant</h1>
-        -->
+        <div data-role="header" data-theme='b'>
+            <h1>Restaurant Detail</h1>
             <!-- navbar -->
-            <!--
             <div data-role="navbar" data-theme='b'>
                 <ul>
-                    <li><a href="#homePage">Home</a></li>
-                    <li><a href="#addPage">Add Restaurant</a></li>
-                    <li><a href="#listPage">List Restaurants</a></li>
-                    <li><a href="#detailPage">Restaurant Detail</a></li>
-                    <li><a href="#updatePage">Update Details</a></li>
+                    <li><a href="#homePage" data-icon="home">Home</a></li>
+                    <li><a href="#addPage" data-icon="plus">Add Restaurant</a></li>
+                    <li><a href="#listPage" data-icon="grid">List Restaurants</a></li>                    
                 </ul>
             </div>
         </div>
-        -->
 
         <!--   page content -->
-        <!--
-        <div data-role="content" data-theme='e'>
-            <strong>****NOTE: THIS PAGE WILL ADD USER'S SECOND, THIRD, etc. VISITS TO RESTAURANT AND ADD ANOTHER <br />"DATE
-                VISITED" & "MENU TRIED" INPUTS TO THE EXISTING LIST</strong>
-            <p><b>Update Restaurant</b></p><br />
+        <div id="updateContent">
+            <h2 id="updateHeader">Update Visit</h2>
 
-            <p id="updateDetailsPage"></p><br />
-            <p id="dateDetail2"></p>
-            <p id="menuDetail2"></p><br />
-                
-
-            Enter Date Visited <br />
-            <input type="text" value="" id="dateUpdate" placeholder="mm/dd/yyyy" />
-            Enter Menu(s) Tried <br />
-            <input type="text" value="" id="menuTriedUpdate" placeholder="e.g. Beef Wellington, Caesar Salad" />
-
-            <input type="button" value="Update" id="updateBtn" data-inline="true" />
-
-
+            <b>Enter New Date Visited</b> <br />
+            <input type="text" value="" id="newDate" placeholder="mm/dd/yyyy" />
+            <b>Enter Another Menu(s) Tried</b> <br />
+            <input type="text" value="" id="newMenuTried" placeholder="e.g. New York Steak, Caesar Salad" /><br />
+            <input type="button" value="Update" id="updateVisitBtn" />
         </div>
-        -->
 
         <!--   page footer -->
-        <!--
         <div data-role="footer" data-theme='b'>
             <h1>&copy; Copyright 2022 by Jackson Chu</h1>
         </div>
     </div>
-        -->
-    <!----------------------------------------- End of Update Page ---------------------------------------- -->
-    
-
+    <!----------------------------------------- End of Detail Page ------------------------------------------>
 
 </body>
 
